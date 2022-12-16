@@ -1,0 +1,24 @@
+server:
+  port: 9296
+
+spring:
+  application:
+    name: CONFIG-SERVER
+  cloud:
+    config:
+      server:
+        git:
+          username: Rapter1990
+          password: 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
+          uri: https://github.com/Rapter1990/springappconfig
+          clone-on-start: true
+
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: ${EUREKA_SERVER_ADDRESS:http://localhost:8761/eureka}

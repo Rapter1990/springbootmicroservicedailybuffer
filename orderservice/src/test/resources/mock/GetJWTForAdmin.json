@@ -1,0 +1,11 @@
+{
+  "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJVc2VyQWRtaW4iLCJpc3MiOiJST0xFX0FETUlOICIsImlhdCI6MTY3MDc2ODQzMCwiZXhwIjoxNjcwNzY4NDkwfQ.trWpsNpX9ahOR8ABnuyoRWv2FHywnoGp9BBSA2djk_TBuSKVoZ8UJvldcyS1AAXRoYWs9buxpP8zGOyzSek3LA",
+  "type": "Bearer",
+  "refreshToken": "fd223ce2-dcc9-4b76-9657-43766e2ea569",
+  "id": 1,
+  "username": "UserAdmin",
+  "email": "useradmin@refreshtoken.com",
+  "roles": [
+    "ROLE_ADMIN"
+  ]
+}

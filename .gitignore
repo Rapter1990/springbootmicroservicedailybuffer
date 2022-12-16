@@ -1,0 +1,8 @@
+# Project exclude paths
+/apigateway/target/
+/auth-service/target/
+/configserver/target/
+/orderservice/target/
+/paymentservice/target/
+/productservice/target/
+/service-registry/target/
