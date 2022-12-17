@@ -5,6 +5,8 @@ services:
     container_name: serviceregistry
     ports:
       - '8761:8761'
+    networks:
+      - backend
 
   configserver:
     image: 'microservicedailybuffer/configserver:0.0.1'
@@ -20,6 +22,8 @@ services:
       retries: 5
     depends_on:
       - serviceregistry
+    networks:
+      - backend
 
   apigateway:
     image: 'microservicedailybuffer/apigateway:0.0.1'
@@ -35,17 +39,23 @@ services:
       - configserver
       - zipkin
       - redis
+    networks:
+      - backend
 
 
   zipkin:
     image: openzipkin/zipkin
     ports:
       - "9411:9411"
+    networks:
+      - backend
 
   redis:
     image: redis
     ports:
       - "6379:6379"
+    networks:
+      - backend
 
 
   authservice:
@@ -56,9 +66,9 @@ services:
     environment:
       - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
       - CONFIG_SERVER_URL=configserver
-      - MYSQL_URL=jdbc:mysql://database:3306/userdb
-      - MYSQL_USERNAME=springbootuser
-      - MYSQL_PASSWORD=111111
+      - spring.datasource.url=jdbc:mysql://database:3306/userdb?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Turkey
+      - spring.datasource.username=springmicroserviceuser
+      - spring.datasource.password=111111
     depends_on:
       database:
         condition: service_healthy
@@ -76,9 +86,9 @@ services:
     environment:
       - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
       - CONFIG_SERVER_URL=configserver
-      - MYSQL_URL=jdbc:mysql://database:3306/productdb
-      - MYSQL_USERNAME=springbootuser
-      - MYSQL_PASSWORD=111111
+      - spring.datasource.url=jdbc:mysql://database:3306/productdb?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Turkey
+      - spring.datasource.username=springmicroserviceuser
+      - spring.datasource.password=111111
       - ZIPKIN_URL=http://zipkin:9411
     depends_on:
       database:
@@ -98,9 +108,9 @@ services:
     environment:
       - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
       - CONFIG_SERVER_URL=configserver
-      - MYSQL_URL=jdbc:mysql://database:3306/orderdb
-      - MYSQL_USERNAME=springbootuser
-      - MYSQL_PASSWORD=111111
+      - spring.datasource.url=jdbc:mysql://database:3306/orderdb?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Turkey
+      - spring.datasource.username=springmicroserviceuser
+      - spring.datasource.password=111111
       - ZIPKIN_URL=http://zipkin:9411
     depends_on:
       database:
@@ -121,9 +131,9 @@ services:
     environment:
       - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
       - CONFIG_SERVER_URL=configserver
-      - MYSQL_URL=jdbc:mysql://database:3306/paymentdb
-      - MYSQL_USERNAME=springbootuser
-      - MYSQL_PASSWORD=111111
+      - spring.datasource.url=jdbc:mysql://database:3306/paymentdb?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Turkey
+      - spring.datasource.username=springmicroserviceuser
+      - spring.datasource.password=111111
       - ZIPKIN_URL=http://zipkin:9411
     depends_on:
       database:
