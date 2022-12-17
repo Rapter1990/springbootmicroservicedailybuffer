@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://${DB_HOST:localhost}:3306/orderdb?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Turkey
-    username: springmicroserviceuser
-    password: 111111
+    url: jdbc:mysql://localhost:3306/orderdb?&zerodatetimebehavior=Converttonull&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrival=true
+    username: root
+    password: secret
     driverClassName: com.mysql.cj.jdbc.Driver
   jpa:
     database-platform: org.hibernate.dialect.MySQL57InnoDBDialect

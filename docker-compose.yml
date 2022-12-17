@@ -1,18 +1,26 @@
 services:
 
   serviceregistry:
-    image: 'microservicedailybuffer/serviceregistry:0.0.1'
+    build: ./service-registry
+    image: '1993erick/serviceregistry:0.0.1'
     container_name: serviceregistry
     ports:
       - '8761:8761'
+    networks:
+      - backend
+    depends_on:
+      - zipkin
 
   configserver:
-    image: 'microservicedailybuffer/configserver:0.0.1'
+    build: ./configserver
+    image: '1993erick/configserver:0.0.1'
     container_name: configserver
     ports:
       - '9296:9296'
-    environment:
-      - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
+    #environment:
+      #- EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
+    networks:
+      - backend
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://configserver:9296/actuator/health" ]
       interval: 10s
@@ -22,7 +30,8 @@ services:
       - serviceregistry
 
   apigateway:
-    image: 'microservicedailybuffer/apigateway:0.0.1'
+    build: ./apigateway
+    image: '1993erick/apigateway:0.0.1'
     container_name: apigateway
     ports:
       - '9090:9090'
@@ -31,16 +40,21 @@ services:
       - CONFIG_SERVER_URL=configserver
       - ZIPKIN_URL=http://zipkin:9411
       - REDIS_URL=redis://redis:6379
+    networks:
+      - backend
     depends_on:
       - configserver
       - zipkin
       - redis
+      - serviceregistry
 
 
   zipkin:
     image: openzipkin/zipkin
     ports:
       - "9411:9411"
+    networks:
+      - backend
 
   redis:
     image: redis
@@ -49,7 +63,8 @@ services:
 
 
   authservice:
-    image: 'microservicedailybuffer/authservice:0.0.1'
+    build: ./auth-service
+    image: '1993erick/authservice:0.0.1'
     container_name: authservice
     ports:
       - '7777:7777'
@@ -60,7 +75,7 @@ services:
       - MYSQL_USERNAME=springbootuser
       - MYSQL_PASSWORD=111111
     depends_on:
-      database:
+      mysql:
         condition: service_healthy
       configserver:
         condition: service_started
@@ -69,7 +84,8 @@ services:
 
 
   productservice:
-    image: 'microservicedailybuffer/productservice:0.0.1'
+    build: ./productservice
+    image: '1993erick/productservice:0.0.1'
     container_name: productservice
     ports:
       - '8081:8081'
@@ -81,7 +97,7 @@ services:
       - MYSQL_PASSWORD=111111
       - ZIPKIN_URL=http://zipkin:9411
     depends_on:
-      database:
+      mysql:
         condition: service_healthy
       configserver:
         condition: service_started
@@ -91,30 +107,39 @@ services:
       - backend
 
   orderservice:
-    image: 'microservicedailybuffer/orderservice:0.0.1'
+    build: ./orderservice
+    image: '1993erick/orderservice:0.0.1'
     container_name: orderservice
     ports:
       - '8082:8082'
     environment:
       - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
       - CONFIG_SERVER_URL=configserver
-      - MYSQL_URL=jdbc:mysql://database:3306/orderdb
-      - MYSQL_USERNAME=springbootuser
-      - MYSQL_PASSWORD=111111
+      #- MYSQL_URL=jdbc:mysql://database:3306/orderdb
+      #- MYSQL_USERNAME=springbootuser
+      #- MYSQL_PASSWORD=111111
       - ZIPKIN_URL=http://zipkin:9411
-    depends_on:
-      database:
-        condition: service_healthy
-      configserver:
-        condition: service_started
-      zipkin:
-        condition: service_healthy
     networks:
       - backend
+      - mysql
+    depends_on:
+      - mysql
+      - configserver
+      - zipkin
+      #database:
+        #condition: service_started
+      #configserver:
+        #condition: service_started
+      #zipkin:
+        #condition: service_healthy
+      #serviceregistry:
+        #condition : service_started
+
 
 
   paymentservice:
-    image: 'microservicedailybuffer/paymentservice:0.0.1'
+    build: ./paymentservice
+    image: '1993erick/paymentservice:0.0.1'
     container_name: paymentservice
     ports:
       - '8083:8083'
@@ -126,7 +151,7 @@ services:
       - MYSQL_PASSWORD=111111
       - ZIPKIN_URL=http://zipkin:9411
     depends_on:
-      database:
+      mysql:
         condition: service_healthy
       configserver:
         condition: service_started
@@ -136,20 +161,21 @@ services:
       - backend
 
 
-  database:
+  mysql:
     container_name: mysql-database
     image: 'mysql:latest'
     ports:
-      - "3366:3306"
+      - "3306:3306"
     restart: always
     environment:
-      MYSQL_USER: "springmicroserviceuser"
-      MYSQL_PASSWORD: "111111"
-      MYSQL_ROOT_PASSWORD: "111111"
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_USER: root
+      MYSQL_PASSWORD: secret
     volumes:
-      - db-data:/var/lib/mysql
+      - mysql:/var/lib/mysql
     networks:
-      - backend
+      - mysql
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       timeout: 20s
@@ -159,6 +185,8 @@ services:
 networks:
   backend:
     driver: bridge
+  mysql:
+    driver: bridge
 
 volumes:
-  db-data:
+  mysql:
