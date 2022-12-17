@@ -193,7 +193,6 @@
     <orderEntry type="library" name="Maven: io.zipkin.brave:brave-instrumentation-mongodb:5.13.9" level="project" />
     <orderEntry type="library" name="Maven: io.zipkin.aws:brave-propagation-aws:0.21.3" level="project" />
     <orderEntry type="library" name="Maven: io.zipkin.reporter2:zipkin-reporter-metrics-micrometer:2.16.3" level="project" />
-    <orderEntry type="module" module-name="productservice" />
     <orderEntry type="library" name="Maven: org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j:2.1.4" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.cloud:spring-cloud-circuitbreaker-resilience4j:2.1.4" level="project" />
     <orderEntry type="library" name="Maven: io.github.resilience4j:resilience4j-spring-boot2:1.7.0" level="project" />

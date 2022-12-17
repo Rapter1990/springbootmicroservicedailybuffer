@@ -1,0 +1,164 @@
+services:
+
+  serviceregistry:
+    image: 'microservicedailybuffer/serviceregistry:0.0.1'
+    container_name: serviceregistry
+    ports:
+      - '8761:8761'
+
+  configserver:
+    image: 'microservicedailybuffer/configserver:0.0.1'
+    container_name: configserver
+    ports:
+      - '9296:9296'
+    environment:
+      - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://configserver:9296/actuator/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    depends_on:
+      - serviceregistry
+
+  apigateway:
+    image: 'microservicedailybuffer/apigateway:0.0.1'
+    container_name: apigateway
+    ports:
+      - '9090:9090'
+    environment:
+      - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
+      - CONFIG_SERVER_URL=configserver
+      - ZIPKIN_URL=http://zipkin:9411
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - configserver
+      - zipkin
+      - redis
+
+
+  zipkin:
+    image: openzipkin/zipkin
+    ports:
+      - "9411:9411"
+
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+
+
+  authservice:
+    image: 'microservicedailybuffer/authservice:0.0.1'
+    container_name: apigateway
+    ports:
+      - '7777:7777'
+    environment:
+      - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
+      - CONFIG_SERVER_URL=configserver
+      - MYSQL_URL=jdbc:mysql://database:3306/userdb
+      - MYSQL_USERNAME=springbootuser
+      - MYSQL_PASSWORD=111111
+    depends_on:
+      database:
+        condition: service_healthy
+      configserver:
+        condition: service_started
+    networks:
+      - backend
+
+
+  productservice:
+    image: 'microservicedailybuffer/productservice:0.0.1'
+    container_name: productservice
+    ports:
+      - '8081:8081'
+    environment:
+      - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
+      - CONFIG_SERVER_URL=configserver
+      - MYSQL_URL=jdbc:mysql://database:3306/productdb
+      - MYSQL_USERNAME=springbootuser
+      - MYSQL_PASSWORD=111111
+      - ZIPKIN_URL=http://zipkin:9411
+    depends_on:
+      database:
+        condition: service_healthy
+      configserver:
+        condition: service_started
+      zipkin:
+        condition: service_healthy
+    networks:
+      - backend
+
+  orderservice:
+    image: 'microservicedailybuffer/orderservice:0.0.1'
+    container_name: orderservice
+    ports:
+      - '8082:8082'
+    environment:
+      - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
+      - CONFIG_SERVER_URL=configserver
+      - MYSQL_URL=jdbc:mysql://database:3306/orderdb
+      - MYSQL_USERNAME=springbootuser
+      - MYSQL_PASSWORD=111111
+      - ZIPKIN_URL=http://zipkin:9411
+    depends_on:
+      database:
+        condition: service_healthy
+      configserver:
+        condition: service_started
+      zipkin:
+        condition: service_healthy
+    networks:
+      - backend
+
+
+  paymentservice:
+    image: 'microservicedailybuffer/paymentservice:0.0.1'
+    container_name: paymentservice
+    ports:
+      - '8083:8083'
+    environment:
+      - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
+      - CONFIG_SERVER_URL=configserver
+      - MYSQL_URL=jdbc:mysql://database:3306/paymentdb
+      - MYSQL_USERNAME=springbootuser
+      - MYSQL_PASSWORD=111111
+      - ZIPKIN_URL=http://zipkin:9411
+    depends_on:
+      database:
+        condition: service_healthy
+      configserver:
+        condition: service_started
+      zipkin:
+        condition: service_healthy
+    networks:
+      - backend
+
+
+  database:
+    container_name: mysql-database
+    image: 'mysql:latest'
+    ports:
+      - "3366:3306"
+    restart: always
+    environment:
+      MYSQL_USER: "springmicroserviceuser"
+      MYSQL_PASSWORD: "111111"
+      MYSQL_ROOT_PASSWORD: "111111"
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  db-data:
