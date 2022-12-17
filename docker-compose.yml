@@ -39,6 +39,7 @@ services:
       - configserver
       - zipkin
       - redis
+      - serviceregistry
     networks:
       - backend
 
@@ -150,7 +151,7 @@ services:
     container_name: mysql-database
     image: 'mysql:latest'
     ports:
-      - "3366:3306"
+      - "3306:3306"
     restart: always
     environment:
       MYSQL_USER: "springmicroserviceuser"
