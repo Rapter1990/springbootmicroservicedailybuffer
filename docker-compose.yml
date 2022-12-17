@@ -50,7 +50,7 @@ services:
 
   authservice:
     image: 'microservicedailybuffer/authservice:0.0.1'
-    container_name: apigateway
+    container_name: authservice
     ports:
       - '7777:7777'
     environment:
