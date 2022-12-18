@@ -37,6 +37,8 @@ public class OrderController {
 
         log.info("OrderController | getOrderDetails is called");
 
+        log.info("OrderController | getOrderDetails | Authorization : " + bearerToken);
+
         OrderResponse orderResponse
                 = orderService.getOrderDetails(orderId, bearerToken);
 
