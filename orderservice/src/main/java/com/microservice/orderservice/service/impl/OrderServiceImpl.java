@@ -13,6 +13,9 @@ import com.microservice.orderservice.repository.OrderRepository;
 import com.microservice.orderservice.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -86,7 +89,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderResponse getOrderDetails(long orderId) {
+    public OrderResponse getOrderDetails(long orderId, String bearerToken) {
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Authorization", "Bearer "+ bearerToken);
+
+        HttpEntity request = new HttpEntity<>(headers);
 
         log.info("OrderServiceImpl | getOrderDetails | Get order details for Order Id : {}", orderId);
 
@@ -102,6 +111,7 @@ public class OrderServiceImpl implements OrderService {
                 "http://PRODUCT-SERVICE/product/" + order.getProductId(),
                 ProductResponse.class
         );
+
 
         log.info("OrderServiceImpl | getOrderDetails | Getting payment information form the payment Service");
         PaymentResponse paymentResponse

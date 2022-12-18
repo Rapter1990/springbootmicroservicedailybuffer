@@ -33,12 +33,12 @@ public class OrderController {
 
     @PreAuthorize("hasAuthority('ROLE_USER')")
     @GetMapping("/{orderId}")
-    public ResponseEntity<OrderResponse> getOrderDetails(@PathVariable long orderId) {
+    public ResponseEntity<OrderResponse> getOrderDetails(@PathVariable long orderId, @RequestHeader("Authorization") String bearerToken) {
 
         log.info("OrderController | getOrderDetails is called");
 
         OrderResponse orderResponse
-                = orderService.getOrderDetails(orderId);
+                = orderService.getOrderDetails(orderId, bearerToken);
 
         log.info("OrderController | getOrderDetails | orderResponse : " + orderResponse.toString());
 

@@ -16,7 +16,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -53,6 +55,12 @@ public class OrderServiceImplTest {
     @Test
     void test_When_Order_Success() {
 
+        String bearerToken = "";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Authorization", "Bearer "+ bearerToken);
+
         //Mocking
         Order order = getMockOrder();
         when(orderRepository.findById(anyLong()))
@@ -69,7 +77,7 @@ public class OrderServiceImplTest {
         )).thenReturn(getMockPaymentResponse());
 
         //Actual
-        OrderResponse orderResponse = orderService.getOrderDetails(1);
+        OrderResponse orderResponse = orderService.getOrderDetails(1,bearerToken);
 
         //Verification
         verify(orderRepository, times(1)).findById(anyLong());
@@ -89,12 +97,18 @@ public class OrderServiceImplTest {
     @Test
     void test_When_Get_Order_NOT_FOUND_then_Not_Found() {
 
+        String bearerToken = "";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Authorization", "Bearer "+ bearerToken);
+
         when(orderRepository.findById(anyLong()))
                 .thenReturn(Optional.ofNullable(null));
 
         CustomException exception =
                 assertThrows(CustomException.class,
-                        () -> orderService.getOrderDetails(1));
+                        () -> orderService.getOrderDetails(1,bearerToken));
         assertEquals("NOT_FOUND", exception.getErrorCode());
         assertEquals(404, exception.getStatus());
 
