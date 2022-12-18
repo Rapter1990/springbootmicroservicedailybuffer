@@ -18,5 +18,5 @@ spring:
 
 jwt:
   secret: mySecretKey
-  expireMs: 60000
+  expireMs: 120000
   refrEshexpireMs: 120000
