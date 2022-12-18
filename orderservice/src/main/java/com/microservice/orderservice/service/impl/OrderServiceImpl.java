@@ -93,7 +93,7 @@ public class OrderServiceImpl implements OrderService {
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set("Authorization", "Bearer "+ bearerToken);
 
-        HttpEntity request = new HttpEntity<>(headers);
+        HttpEntity<String> request = new HttpEntity<String>(headers);
 
         log.info("OrderServiceImpl | getOrderDetails | Get order details for Order Id : {}", orderId);
 
