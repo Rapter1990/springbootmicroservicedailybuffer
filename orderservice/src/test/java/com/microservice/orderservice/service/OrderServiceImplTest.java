@@ -52,7 +52,7 @@ public class OrderServiceImplTest {
     @Test
     void test_When_Order_Success() {
 
-        String bearerToken = "";
+        String bearerToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJVc2VyIiwiaXNzIjoiUk9MRV9VU0VSICIsImlhdCI6MTY3MTM5NTQ0MCwiZXhwIjoxNjcxMzk1NTYwfQ.fBhI_flxuuXZfwhd8hEVdfkZkMNobVsi4hAdSXdl5qqWRedJWQWZXwYVdfSof6ezH7myZNQgn-kRNBXIDDHGDQ";
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
