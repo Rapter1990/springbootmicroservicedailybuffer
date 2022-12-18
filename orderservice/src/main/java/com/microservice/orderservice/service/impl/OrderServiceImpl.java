@@ -13,9 +13,7 @@ import com.microservice.orderservice.repository.OrderRepository;
 import com.microservice.orderservice.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -106,19 +104,29 @@ public class OrderServiceImpl implements OrderService {
                         404));
 
         log.info("OrderServiceImpl | getOrderDetails | Invoking Product service to fetch the product for id: {}", order.getProductId());
-        ProductResponse productResponse
+        /*ProductResponse productResponse
                 = restTemplate.getForObject(
                 "http://PRODUCT-SERVICE/product/" + order.getProductId(),
                 ProductResponse.class
-        );
+        );*/
+
+        ResponseEntity<ProductResponse> responseProduct = restTemplate.exchange(
+                "http://PRODUCT-SERVICE/product/" + order.getProductId(),
+                HttpMethod.GET, request, ProductResponse.class);
+        ProductResponse productResponse = responseProduct.getBody();
 
 
         log.info("OrderServiceImpl | getOrderDetails | Getting payment information form the payment Service");
-        PaymentResponse paymentResponse
+        /*PaymentResponse paymentResponse
                 = restTemplate.getForObject(
                 "http://PAYMENT-SERVICE/payment/order/" + order.getId(),
                 PaymentResponse.class
-        );
+        );*/
+
+        ResponseEntity<PaymentResponse> responsePayment = restTemplate.exchange(
+                "http://PAYMENT-SERVICE/payment/order/" + order.getId(),
+                HttpMethod.GET, request, PaymentResponse.class);
+        PaymentResponse paymentResponse = responsePayment.getBody();
 
         OrderResponse.ProductDetails productDetails
                 = OrderResponse.ProductDetails

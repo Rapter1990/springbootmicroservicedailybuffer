@@ -16,10 +16,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.Instant;
@@ -61,20 +58,20 @@ public class OrderServiceImplTest {
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set("Authorization", "Bearer "+ bearerToken);
 
+        HttpEntity request = new HttpEntity<>(headers);
+
         //Mocking
         Order order = getMockOrder();
         when(orderRepository.findById(anyLong()))
                 .thenReturn(Optional.of(order));
 
-        when(restTemplate.getForObject(
+        when(restTemplate.exchange(
                 "http://PRODUCT-SERVICE/product/" + order.getProductId(),
-                ProductResponse.class
-        )).thenReturn(getMockProductResponse());
+                HttpMethod.GET, request, ProductResponse.class).getBody()).thenReturn(getMockProductResponse());
 
-        when(restTemplate.getForObject(
+        when(restTemplate.exchange(
                 "http://PAYMENT-SERVICE/payment/order/" + order.getId(),
-                PaymentResponse.class
-        )).thenReturn(getMockPaymentResponse());
+                HttpMethod.GET, request, PaymentResponse.class).getBody()).thenReturn(getMockPaymentResponse());
 
         //Actual
         OrderResponse orderResponse = orderService.getOrderDetails(1,bearerToken);
@@ -119,6 +116,7 @@ public class OrderServiceImplTest {
     @DisplayName("Place Order - Success Scenario")
     @Test
     void test_When_Place_Order_Success() {
+
         Order order = getMockOrder();
         OrderRequest orderRequest = getMockOrderRequest();
 
