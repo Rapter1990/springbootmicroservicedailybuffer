@@ -68,8 +68,8 @@ services:
       - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
       - CONFIG_SERVER_URL=configserver
       - spring.datasource.url=jdbc:mysql://database:3306/userdb?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Turkey
-      - spring.datasource.username=springmicroserviceuser
-      - spring.datasource.password=111111
+      - spring.datasource.username=root
+      - spring.datasource.password=ippavlova_1990
     depends_on:
       database:
         condition: service_healthy
@@ -88,8 +88,8 @@ services:
       - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
       - CONFIG_SERVER_URL=configserver
       - spring.datasource.url=jdbc:mysql://database:3306/productdb?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Turkey
-      - spring.datasource.username=springmicroserviceuser
-      - spring.datasource.password=111111
+      - spring.datasource.username=root
+      - spring.datasource.password=ippavlova_1990
       - ZIPKIN_URL=http://zipkin:9411
     depends_on:
       database:
@@ -110,8 +110,8 @@ services:
       - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
       - CONFIG_SERVER_URL=configserver
       - spring.datasource.url=jdbc:mysql://database:3306/orderdb?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Turkey
-      - spring.datasource.username=springmicroserviceuser
-      - spring.datasource.password=111111
+      - spring.datasource.username=root
+      - spring.datasource.password=ippavlova_1990
       - ZIPKIN_URL=http://zipkin:9411
     depends_on:
       database:
@@ -133,8 +133,8 @@ services:
       - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
       - CONFIG_SERVER_URL=configserver
       - spring.datasource.url=jdbc:mysql://database:3306/paymentdb?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Turkey
-      - spring.datasource.username=springmicroserviceuser
-      - spring.datasource.password=111111
+      - spring.datasource.username=root
+      - spring.datasource.password=ippavlova_1990
       - ZIPKIN_URL=http://zipkin:9411
     depends_on:
       database:
@@ -154,9 +154,9 @@ services:
       - "3306:3306"
     restart: always
     environment:
-      MYSQL_USER: "springmicroserviceuser"
-      MYSQL_PASSWORD: "111111"
-      MYSQL_ROOT_PASSWORD: "111111"
+      #MYSQL_USER: root
+      MYSQL_PASSWORD: ippavlova_1990
+      MYSQL_ROOT_PASSWORD: ippavlova_1990
     volumes:
       - db-data:/var/lib/mysql
     networks:
