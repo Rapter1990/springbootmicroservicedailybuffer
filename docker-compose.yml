@@ -36,10 +36,12 @@ services:
       - ZIPKIN_URL=http://zipkin:9411
       - REDIS_URL=redis://redis:6379
     depends_on:
-      - configserver
-      - zipkin
-      - redis
-      - serviceregistry
+      configserver:
+        condition: service_healthy
+      zipkin:
+        condition: service_healthy
+      redis:
+        condition: service_started
     networks:
       - backend
 
