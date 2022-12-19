@@ -91,7 +91,7 @@ public class OrderServiceImpl implements OrderService {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("Authorization", "Bearer "+ bearerToken);
+        headers.set("Authorization", bearerToken);
 
         HttpEntity<String> request = new HttpEntity<String>(headers);
 
