@@ -52,13 +52,13 @@ public class OrderServiceImplTest {
     @Test
     void test_When_Order_Success() {
 
-        String bearerToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJVc2VyIiwiaXNzIjoiUk9MRV9VU0VSICIsImlhdCI6MTY3MTQ4ODgyMiwiZXhwIjoxNjcxNDg4OTQyfQ.g83kKmFzDH539ZcpxM9D8bE_famFOevkOqNst_E8YG07b4yR4cEqcrySvz36vw8GJxTKm9gUQIM1J_G8cC5RGQ";
+        String bearerToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJVc2VyIiwiaXNzIjoiUk9MRV9VU0VSICIsImlhdCI6MTY3MTU2MTQ3NywiZXhwIjoxNjcxNTYxNTk3fQ.DlxEnvkRKlWxEc_Qm70K5WZw41xYGH6uBc3s_oBe2rYsDiAfQSj9QRfy8fL9cGT5vJvIZkMhRdOqGm0guTh93A";
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("Authorization", "Bearer " + bearerToken);
+        headers.set("Authorization", "Bearer "+ bearerToken);
 
-        HttpEntity<String> request = new HttpEntity<String>(headers);
+        HttpEntity request = new HttpEntity<>(headers);
 
         //Mocking
         Order order = getMockOrder();
