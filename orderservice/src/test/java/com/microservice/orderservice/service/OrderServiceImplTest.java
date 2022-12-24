@@ -67,6 +67,14 @@ public class OrderServiceImplTest {
 
         when(restTemplate.exchange(
                 "http://PRODUCT-SERVICE/product/" + order.getProductId(),
+                HttpMethod.GET, request, ProductResponse.class)).thenReturn(ResponseEntity.ok(getMockProductResponse()));
+
+        when(restTemplate.exchange(
+                "http://PAYMENT-SERVICE/payment/order/" + order.getId(),
+                HttpMethod.GET, request, PaymentResponse.class)).thenReturn(ResponseEntity.ok(getMockPaymentResponse()));
+
+        when(restTemplate.exchange(
+                "http://PRODUCT-SERVICE/product/" + order.getProductId(),
                 HttpMethod.GET, request, ProductResponse.class).getBody()).thenReturn(getMockProductResponse());
 
         when(restTemplate.exchange(
