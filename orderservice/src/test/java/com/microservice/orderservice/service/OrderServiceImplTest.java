@@ -54,7 +54,7 @@ public class OrderServiceImplTest {
     @Test
     void test_When_Order_Success() {
 
-        String bearerToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJVc2VyIiwiaXNzIjoiUk9MRV9VU0VSICIsImlhdCI6MTY3MjQ0Mjg3NywiZXhwIjoxNjcyNDQyOTk3fQ.O6Rm41kFN8SBNUVAiKrsM4O_PBI5qurpmSU34AEk5RTT3ZkPoxiFGeI0byrHOBPPOgyVRXxY_KhgzPcKKgm1ew";
+        String bearerToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJVc2VyIiwiaXNzIjoiUk9MRV9VU0VSICIsImlhdCI6MTY3MjQ0NDI2MiwiZXhwIjoxNjcyNDQ0MzgyfQ.8QKm8VKgi8zHAo7YGngB00ng6XrByyofzUkEq_3g4omRA_ODGpwjDYSDNIvpEKXEATt6oMWV9JrMkHz3hI-xOw";
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -77,7 +77,7 @@ public class OrderServiceImplTest {
                 HttpMethod.GET, request, PaymentResponse.class)).thenReturn(ResponseEntity.ok(getMockPaymentResponse()));
 
         //Actual
-        OrderResponse orderResponse = orderService.getOrderDetails(1,bearerToken);
+        OrderResponse orderResponse = orderService.getOrderDetails(1,"Bearer "+ bearerToken);
 
         //Verification
         verify(orderRepository, times(1)).findById(anyLong());
