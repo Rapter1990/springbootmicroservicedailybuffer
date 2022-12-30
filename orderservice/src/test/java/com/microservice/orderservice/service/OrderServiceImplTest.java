@@ -15,6 +15,8 @@ import com.microservice.orderservice.utils.PaymentMode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
@@ -26,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class OrderServiceImplTest {
 
     private OrderRepository orderRepository;
@@ -52,7 +54,7 @@ public class OrderServiceImplTest {
     @Test
     void test_When_Order_Success() {
 
-        String bearerToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJVc2VyIiwiaXNzIjoiUk9MRV9VU0VSICIsImlhdCI6MTY3MTU2MTQ3NywiZXhwIjoxNjcxNTYxNTk3fQ.DlxEnvkRKlWxEc_Qm70K5WZw41xYGH6uBc3s_oBe2rYsDiAfQSj9QRfy8fL9cGT5vJvIZkMhRdOqGm0guTh93A";
+        String bearerToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJVc2VyIiwiaXNzIjoiUk9MRV9VU0VSICIsImlhdCI6MTY3MjQ0Mjg3NywiZXhwIjoxNjcyNDQyOTk3fQ.O6Rm41kFN8SBNUVAiKrsM4O_PBI5qurpmSU34AEk5RTT3ZkPoxiFGeI0byrHOBPPOgyVRXxY_KhgzPcKKgm1ew";
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -65,6 +67,7 @@ public class OrderServiceImplTest {
         when(orderRepository.findById(anyLong()))
                 .thenReturn(Optional.of(order));
 
+
         when(restTemplate.exchange(
                 "http://PRODUCT-SERVICE/product/" + order.getProductId(),
                 HttpMethod.GET, request, ProductResponse.class)).thenReturn(ResponseEntity.ok(getMockProductResponse()));
@@ -73,25 +76,19 @@ public class OrderServiceImplTest {
                 "http://PAYMENT-SERVICE/payment/order/" + order.getId(),
                 HttpMethod.GET, request, PaymentResponse.class)).thenReturn(ResponseEntity.ok(getMockPaymentResponse()));
 
-        when(restTemplate.exchange(
-                "http://PRODUCT-SERVICE/product/" + order.getProductId(),
-                HttpMethod.GET, request, ProductResponse.class).getBody()).thenReturn(getMockProductResponse());
-
-        when(restTemplate.exchange(
-                "http://PAYMENT-SERVICE/payment/order/" + order.getId(),
-                HttpMethod.GET, request, PaymentResponse.class).getBody()).thenReturn(getMockPaymentResponse());
-
         //Actual
         OrderResponse orderResponse = orderService.getOrderDetails(1,bearerToken);
 
         //Verification
         verify(orderRepository, times(1)).findById(anyLong());
-        verify(restTemplate, times(1)).getForObject(
-                "http://PRODUCT-SERVICE/product/" + order.getProductId(),
-                ProductResponse.class);
-        verify(restTemplate, times(1)).getForObject(
-                "http://PAYMENT-SERVICE/payment/order/" + order.getId(),
-                PaymentResponse.class);
+
+        verify(restTemplate, times(1))
+                .exchange("http://PRODUCT-SERVICE/product/" + order.getProductId(), HttpMethod.GET,
+                request, ProductResponse.class);
+
+        verify(restTemplate, times(1))
+                .exchange("http://PAYMENT-SERVICE/payment/order/" + order.getId(), HttpMethod.GET,
+                request, PaymentResponse.class);
 
         //Assert
         assertNotNull(orderResponse);
@@ -195,21 +192,21 @@ public class OrderServiceImplTest {
 
     private ProductResponse getMockProductResponse() {
         return ProductResponse.builder()
-                .productId(2)
-                .productName("iPhone")
-                .price(100)
-                .quantity(200)
+                .productId(1)
+                .productName("Product 1")
+                .price(0)
+                .quantity(0)
                 .build();
     }
 
     private Order getMockOrder() {
         return Order.builder()
-                .orderStatus("PLACED")
+                .orderStatus("CREATED")
                 .orderDate(Instant.now())
                 .id(1)
                 .amount(100)
-                .quantity(200)
-                .productId(2)
+                .quantity(0)
+                .productId(1)
                 .build();
     }
 }
