@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-registry
+spec:
+  selector:
+    matchLabels:
+      app: service-registry
+  template:
+    metadata:
+      labels:
+        app: service-registry
+    spec:
+      containers:
+        - name: service-registry
+          image: dailycodebuffer/serviceregistry:latest
+          ports:
+            - containerPort: 8761
