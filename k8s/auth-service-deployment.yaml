@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-service-app
+spec:
+  selector:
+    matchLabels:
+      app: auth-service-app
+  template:
+    metadata:
+      labels:
+        app: auth-service-app
+    spec:
+      containers:
+        - name: auth-service-app
+          image: noyandocker/authservice
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 7777
+          env:
+            - name: CONFIG_SERVER_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: config-cm
+                  key: config_url
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-cm
+                  key: hostname
+            - name: EUREKA_SERVER_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  name: eureka-cm
+                  key: eureka_service_address
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-service-svc
+spec:
+  selector:
+    app: auth-service-app
+  ports:
+    - port: 80
+      targetPort: 7777
