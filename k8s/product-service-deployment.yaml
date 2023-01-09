@@ -28,6 +28,12 @@ spec:
                 configMapKeyRef:
                   name: eureka-cm
                   key: eureka_service_address
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-cm
+                  key: hostname
+
 
 ---
 
