@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-service-app
+spec:
+  selector:
+    matchLabels:
+      app: product-service-app
+  template:
+    metadata:
+      labels:
+        app: product-service-app
+    spec:
+      containers:
+        - name: product-service-app
+          image: dailycodebuffer/productservice
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8081
+          env:
+            - name: CONFIG_SERVER_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: config-cm
+                  key: config_url
+            - name: EUREKA_SERVER_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  name: eureka-cm
+                  key: eureka_service_address
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-service-svc
+spec:
+  selector:
+    app: product-service-app
+  ports:
+    - port: 80
+      targetPort: 8081
