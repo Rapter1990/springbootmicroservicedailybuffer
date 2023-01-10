@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: product-service-app
-          image: dailycodebuffer/productservice
+          image: noyandocker/productservice
           imagePullPolicy: Always
           ports:
             - containerPort: 8081

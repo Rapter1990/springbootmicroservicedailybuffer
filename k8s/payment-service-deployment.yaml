@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: payment-service-app
-          image: dailycodebuffer/paymentservice
+          image: noyandocker/paymentservice
           imagePullPolicy: Always
           ports:
             - containerPort: 8083
