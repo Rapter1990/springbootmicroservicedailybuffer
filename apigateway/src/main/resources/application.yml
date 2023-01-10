@@ -3,6 +3,9 @@ server:
 
 
 spring:
+  redis:
+    host: redis
+    port: 6379
   application:
     name: API-GATEWAY
   config:
