@@ -14,7 +14,7 @@ spec:
       containers:
         - name: order-service-app
           image: noyandocker/orderservice
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8082
           env:

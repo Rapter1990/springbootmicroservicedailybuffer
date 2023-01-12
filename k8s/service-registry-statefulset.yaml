@@ -16,7 +16,7 @@ spec:
       containers:
         - name: eureka
           image: noyandocker/serviceregistry
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8761
 

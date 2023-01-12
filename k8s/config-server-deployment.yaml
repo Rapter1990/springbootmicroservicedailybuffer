@@ -14,7 +14,7 @@ spec:
       containers:
         - name: config-server-app
           image: noyandocker/configserver
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9296
           env:

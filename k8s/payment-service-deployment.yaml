@@ -14,7 +14,7 @@ spec:
       containers:
         - name: payment-service-app
           image: noyandocker/paymentservice
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8083
           env:

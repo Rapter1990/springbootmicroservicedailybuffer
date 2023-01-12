@@ -14,7 +14,7 @@ spec:
       containers:
         - name: auth-service-app
           image: noyandocker/authservice
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 7777
           env:

@@ -14,7 +14,7 @@ spec:
       containers:
         - name: product-service-app
           image: noyandocker/productservice
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8081
           env:

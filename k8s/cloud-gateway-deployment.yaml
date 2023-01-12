@@ -14,7 +14,7 @@ spec:
       containers:
         - name: cloud-gateway-app
           image: noyandocker/apigateway
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9090
           env:
