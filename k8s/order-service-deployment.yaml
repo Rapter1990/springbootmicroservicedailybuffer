@@ -17,6 +17,22 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8082
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8082
+            initialDelaySeconds: 60
+            timeoutSeconds: 2
+            periodSeconds: 3
+            failureThreshold: 2
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8082
+            initialDelaySeconds: 70
+            timeoutSeconds: 2
+            periodSeconds: 8
+            failureThreshold: 2
           env:
             - name: CONFIG_SERVER_URL
               valueFrom:
