@@ -17,6 +17,18 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9090
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 9090
+            initialDelaySeconds: 180
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 9090
+            initialDelaySeconds: 180
+            periodSeconds: 10
           env:
             - name: CONFIG_SERVER_URL
               valueFrom:
