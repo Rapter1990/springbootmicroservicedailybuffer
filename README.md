@@ -370,22 +370,22 @@
 
 <b>2 )</b> Install minikube to access this link https://minikube.sigs.k8s.io/docs/start/
 
-<b>3 )</b> Open <b>command prompt<b> and install kubectl through this command shown below 
+<b>3 )</b> Open <b>command prompt</b> and install kubectl through this command shown below 
 ```
     minikube kubectl --
 ```
 
-<b>4 )</b> Start minikube through this command shown below.
+<b>4 )</b> Start <b>minikube</b> through this command shown below.
 ```
     minikube start
 ```
 
-<b>5 )</b> Open minikube dashboard through this command shown below.
+<b>5 )</b> Open <b>minikube dashboard</b> through this command shown below.
 ```
     minikube dashboard
 ```
 
-<b>6 )</b> Run all images coming from Docker hub on Kubernetes through this command shown below.
+<b>6 )</b> Run all <b>images</b> coming from Docker hub on Kubernetes through this command shown below.
 ```
     kubectl apply -f k8s
 ```
