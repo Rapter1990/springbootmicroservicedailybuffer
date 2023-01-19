@@ -257,14 +257,6 @@
     Bearer Token : User Token
 ```
 
-## No Request or Params
-
-##### <a id="info"> Request 1
-```
-
-```
-
-
 ### 🔨 Run the App
 
 <b>Local</b>
