@@ -87,9 +87,9 @@
       <td><a href="README.md#deleteProductById">Info</a></td>
   </tr>
   <tr>
-      <th>POST</th>
-      <th>/order/placeorder</th>
-      <th>Place Order</th>
+      <td>POST</td>
+      <td>/order/placeorder</td>
+      <td>Place Order</td>
       <td><a href="README.md#placeOrder">Info</a></td>
       <td></td>
       <td></td>
