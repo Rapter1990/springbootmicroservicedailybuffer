@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -47,7 +48,6 @@ spec:
                   key: hostname
 
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
@@ -56,5 +56,5 @@ spec:
   selector:
     app: order-service-app
   ports:
-    - port: 80
+    - port: 8082
       targetPort: 8082

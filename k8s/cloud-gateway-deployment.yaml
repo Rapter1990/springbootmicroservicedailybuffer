@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -42,7 +43,6 @@ spec:
                   key: eureka_service_address
 
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
@@ -52,5 +52,5 @@ spec:
   selector:
     app: cloud-gateway-app
   ports:
-    - port: 80
+    - port: 9090
       targetPort: 9090
