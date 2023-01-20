@@ -360,9 +360,9 @@
         docker push <your-docker-hub-account-name>/paymentservice
 ```
 
-<b>2 )</b> Install minikube to access this link https://minikube.sigs.k8s.io/docs/start/
+<b>2 )</b> Install <b>minikube</b> to access this link https://minikube.sigs.k8s.io/docs/start/
 
-<b>3 )</b> Open <b>command prompt</b> and install kubectl through this command shown below 
+<b>3 )</b> Open <b>command prompt</b> and install <b>kubectl</b> through this command shown below 
 ```
     minikube kubectl --
 ```
