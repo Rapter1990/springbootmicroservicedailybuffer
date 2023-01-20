@@ -323,7 +323,6 @@
 <b>2 )</b> Run all Containers through this command shown below under main folder
 ```
     docker-compose up -d
-    
 ```
 <b>3 )</b> Send request to any service by using request collections under <b>postman_collection</b> 
 
