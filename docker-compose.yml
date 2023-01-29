@@ -32,7 +32,7 @@ services:
       - '9090:9090'
     environment:
       - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
-      - CONFIG_SERVER_URL=configserver
+      - CONFIG_SERVER_URL=http://configserver:9296
       - ZIPKIN_URL=http://zipkin:9411
       - REDIS_URL=redis://redis:6379
     depends_on:
@@ -68,7 +68,7 @@ services:
       - '7777:7777'
     environment:
       - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
-      - CONFIG_SERVER_URL=configserver
+      - CONFIG_SERVER_URL=http://configserver:9296
       - spring.datasource.url=jdbc:mysql://database:3306/userdb?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Turkey
       - spring.datasource.username=root
       - spring.datasource.password=ippavlova_1990
@@ -88,7 +88,7 @@ services:
       - '8081:8081'
     environment:
       - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
-      - CONFIG_SERVER_URL=configserver
+      - CONFIG_SERVER_URL=http://configserver:9296
       - spring.datasource.url=jdbc:mysql://database:3306/productdb?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Turkey
       - spring.datasource.username=root
       - spring.datasource.password=ippavlova_1990
@@ -110,7 +110,7 @@ services:
       - '8082:8082'
     environment:
       - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
-      - CONFIG_SERVER_URL=configserver
+      - CONFIG_SERVER_URL=http://configserver:9296
       - spring.datasource.url=jdbc:mysql://database:3306/orderdb?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Turkey
       - spring.datasource.username=root
       - spring.datasource.password=ippavlova_1990
@@ -133,7 +133,7 @@ services:
       - '8083:8083'
     environment:
       - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
-      - CONFIG_SERVER_URL=configserver
+      - CONFIG_SERVER_URL=http://configserver:9296
       - spring.datasource.url=jdbc:mysql://database:3306/paymentdb?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Turkey
       - spring.datasource.username=root
       - spring.datasource.password=ippavlova_1990
