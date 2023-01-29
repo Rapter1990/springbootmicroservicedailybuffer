@@ -12,7 +12,7 @@ pipeline {
                 echo "Maven VERSION"
                 sh 'mvn --version'
                 echo 'building project...'
-                sh "mvn clean install -D skipTests"
+                sh "mvn clean --file *.pom install -D skipTests"
             }
         }
     }
