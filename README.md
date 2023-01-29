@@ -326,63 +326,77 @@
   </tr>
 </table>
 
-<b>2 )</b> Run all Containers through this command shown below under main folder
+<b>3 )</b> Build all images and push to <b>Docker Hub</b>
+```
+    1 ) service-registry
+     
+        - docker build -t microservicedailybuffer/serviceregistry:0.0.1 .
+        - docker tag microservicedailybuffer/serviceregistry:0.0.1 noyandocker/serviceregistry
+        - docker push noyandocker/serviceregistry
+        
+    2 ) configserver
+     
+        - docker build -t microservicedailybuffer/configserver:0.0.1 .
+        - docker tag microservicedailybuffer/configserver:0.0.1 noyandocker/configserver
+        - docker push noyandocker/configserver
+    
+    3 ) api-gateway
+     
+        - docker build -t microservicedailybuffer/apigateway:0.0.1 .
+        - docker tag microservicedailybuffer/apigateway:0.0.1 noyandocker/apigateway
+        - docker push noyandocker/apigateway
+    
+    4 ) auth-service
+     
+        - docker build -t microservicedailybuffer/authservice:0.0.1 
+        - docker tag microservicedailybuffer/authservice:0.0.1 noyandocker/authservice
+        - docker push noyandocker/authservice
+        
+    5 ) productservice
+     
+        - docker build -t microservicedailybuffer/productservice:0.0.1 .
+        - docker tag microservicedailybuffer/productservice:0.0.1 noyandocker/productservice
+        - docker push noyandocker/productservice
+        
+    6 ) orderservice
+     
+        - docker build -t microservicedailybuffer/orderservice:0.0.1 .
+        - docker tag microservicedailybuffer/orderservice:0.0.1 noyandocker/orderservice
+        - docker push noyandocker/orderservice
+        
+    7 ) paymentservice
+     
+        - docker build -t microservicedailybuffer/paymentservice:0.0.1 .
+        - docker tag microservicedailybuffer/paymentservice:0.0.1 noyandocker/paymentservice
+        - docker push noyandocker/paymentservice
+```
+
+<b>4 )</b> Run all Containers through this command shown below under main folder
 ```
     docker-compose up -d
 ```
-<b>3 )</b> Send request to any service by using request collections under <b>postman_collection</b> 
+<b>5 )</b> Send request to any service by using request collections under <b>postman_collection</b> 
 
 <b>Kubernetes</b>
 
-<b>1 )</b> While running all container on Docker, push docker image of each service to Docker Hub after login your Docker account
-```
-    1 ) Create serviceregistry
-        docker tag microservicedailybuffer/serviceregistry:0.0.1 <your-docker-hub-account-name>/serviceregistry
-        docker push <your-docker-hub-account-name>/serviceregistry
-        
-    2 ) Create configserver
-        docker tag microservicedailybuffer/configserver:0.0.1 <your-docker-hub-account-name>/configserver
-        docker push <your-docker-hub-account-name>/configserver
-    
-    3 ) Create apigateway
-        docker tag microservicedailybuffer/apigateway:0.0.1 <your-docker-hub-account-name>/apigateway
-        docker push <your-docker-hub-account-name>/apigateway
-        
-    4 ) Create orderservice
-        docker tag microservicedailybuffer/orderservice:0.0.1 <your-docker-hub-account-name>/orderservice
-        docker push <your-docker-hub-account-name>/orderservice
-    
-    5 ) Create authservice
-        docker tag microservicedailybuffer/orderservice:0.0.1 <your-docker-hub-account-name>/authservice
-        docker push <your-docker-hub-account-name>/authservice
-        
-    6 ) Create productservice
-        docker tag microservicedailybuffer/productservice:0.0.1 <your-docker-hub-account-name>/productservice
-        docker push <your-docker-hub-account-name>/productservice
-        
-    7 ) Create paymentservice
-        docker tag microservicedailybuffer/paymentservice:0.0.1 <your-docker-hub-account-name>/paymentservice
-        docker push <your-docker-hub-account-name>/paymentservice
-```
+<b>1 )</b> Install <b>minikube</b> to access this link https://minikube.sigs.k8s.io/docs/start/
 
-<b>2 )</b> Install <b>minikube</b> to access this link https://minikube.sigs.k8s.io/docs/start/
-
-<b>3 )</b> Open <b>command prompt</b> and install <b>kubectl</b> through this command shown below 
+<b>2 )</b> Open <b>command prompt</b> and install <b>kubectl</b> through this command shown below 
 ```
     minikube kubectl --
 ```
 
-<b>4 )</b> Start <b>minikube</b> through this command shown below.
+<b>3 )</b> Start <b>minikube</b> through this command shown below.
 ```
     minikube start
 ```
 
-<b>5 )</b> Open <b>minikube dashboard</b> through this command shown below.
+<b>4 )</b> Open <b>minikube dashboard</b> through this command shown below.
 ```
     minikube dashboard
 ```
 
-<b>6 )</b> Run all <b>images</b> coming from Docker hub on Kubernetes through this command shown below.
+<b>5 )</b> Run all <b>images</b> coming from Docker hub on Kubernetes through this command shown below.
 ```
     kubectl apply -f k8s
 ```
