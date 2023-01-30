@@ -400,3 +400,34 @@
 ```
     kubectl apply -f k8s
 ```
+
+<b>Jenkins</b>
+
+<b>1 )</b> Download <b>jenkins</b> to access this link https://hub.docker.com/r/jenkins/jenkins
+
+<b>2 )</b> Run <b>Jenkins</b> through this command shown below
+```
+    docker run -p 8080:8080 -p 50000:50000 --restart=on-failure jenkins/jenkins:lts-jdk11
+```
+
+<b>3 ) Install <b>Jenkins</b> and define <b>username</b> and <b>password</b></b> 
+
+<b>3 ) Click <i>New Item</i> and Create pipeline to run Jenkinsfile
+
+<b>4 ) Run <b>pipeline</b>
+
+
+### Screenshots
+
+<details>
+<summary>Click here to show the screenshot of project</summary>
+    <p> Docker Desktop to show all running containers </p>
+    <img src ="screenshots/docker_1.PNG">
+    <p> Docker Hub </p>
+    <img src ="screenshots/docker_2.PNG">
+    <p> Jenkins Figure 1 </p>
+    <img src ="screenshots/jenkins_1.PNG">
+    <p> Jenkins Figure 2 </p>
+    <img src ="screenshots/jenkins_2.PNG">
+</details>   
+
