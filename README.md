@@ -410,7 +410,7 @@
     docker run -p 8080:8080 -p 50000:50000 --restart=on-failure jenkins/jenkins:lts-jdk11
 ```
 
-<b>3 ) Install <b>Jenkins</b> and define <b>username</b> and <b>password</b></b> 
+<b>3 )</b> Install <b>Jenkins</b> and define <b>username</b> and <b>password</b></b> 
 
 <b>3 ) Click <i>New Item</i> and Create pipeline to run Jenkinsfile
 
