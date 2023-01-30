@@ -412,9 +412,9 @@
 
 <b>3 )</b> Install <b>Jenkins</b> and define <b>username</b> and <b>password</b></b> 
 
-<b>3 ) Click <i>New Item</i> and Create pipeline to run Jenkinsfile
+<b>3 )</b> Click <i>New Item</i> and Create pipeline to run Jenkinsfile
 
-<b>4 ) Run <b>pipeline</b>
+<b>4 )</b> Run <b>pipeline</b>
 
 
 ### Screenshots
