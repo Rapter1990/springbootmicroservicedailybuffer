@@ -25,7 +25,7 @@ spec:
             initialDelaySeconds: 20
             timeoutSeconds: 10
             periodSeconds: 3
-            failureThreshold: 2
+            failureThreshold: 10
           livenessProbe:
             httpGet:
               path: /actuator/health
@@ -33,7 +33,7 @@ spec:
             initialDelaySeconds: 30
             timeoutSeconds: 2
             periodSeconds: 8
-            failureThreshold: 1
+            failureThreshold: 10
           env:
             - name: EUREKA_SERVER_ADDRESS
               valueFrom:

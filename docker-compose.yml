@@ -1,7 +1,7 @@
 services:
 
   serviceregistry:
-    image: 'microservicedailybuffer/serviceregistry:0.0.1'
+    image: 'noyandocker/serviceregistry:latest'
     container_name: serviceregistry
     ports:
       - '8761:8761'
@@ -9,7 +9,7 @@ services:
       - backend
 
   configserver:
-    image: 'microservicedailybuffer/configserver:0.0.1'
+    image: 'noyandocker/configserver:latest'
     container_name: configserver
     ports:
       - '9296:9296'
@@ -26,13 +26,13 @@ services:
       - backend
 
   apigateway:
-    image: 'microservicedailybuffer/apigateway:0.0.1'
+    image: 'noyandocker/apigateway:latest'
     container_name: apigateway
     ports:
       - '9090:9090'
     environment:
       - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
-      - CONFIG_SERVER_URL=configserver
+      - CONFIG_SERVER_URL=http://configserver:9296
       - ZIPKIN_URL=http://zipkin:9411
       - REDIS_URL=redis://redis:6379
     depends_on:
@@ -62,13 +62,13 @@ services:
 
 
   authservice:
-    image: 'microservicedailybuffer/authservice:0.0.1'
+    image: 'noyandocker/authservice:latest'
     container_name: authservice
     ports:
       - '7777:7777'
     environment:
       - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
-      - CONFIG_SERVER_URL=configserver
+      - CONFIG_SERVER_URL=http://configserver:9296
       - spring.datasource.url=jdbc:mysql://database:3306/userdb?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Turkey
       - spring.datasource.username=root
       - spring.datasource.password=ippavlova_1990
@@ -82,13 +82,13 @@ services:
 
 
   productservice:
-    image: 'microservicedailybuffer/productservice:0.0.1'
+    image: 'noyandocker/productservice:latest'
     container_name: productservice
     ports:
       - '8081:8081'
     environment:
       - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
-      - CONFIG_SERVER_URL=configserver
+      - CONFIG_SERVER_URL=http://configserver:9296
       - spring.datasource.url=jdbc:mysql://database:3306/productdb?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Turkey
       - spring.datasource.username=root
       - spring.datasource.password=ippavlova_1990
@@ -104,13 +104,13 @@ services:
       - backend
 
   orderservice:
-    image: 'microservicedailybuffer/orderservice:0.0.1'
+    image: 'noyandocker/orderservice:latest'
     container_name: orderservice
     ports:
       - '8082:8082'
     environment:
       - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
-      - CONFIG_SERVER_URL=configserver
+      - CONFIG_SERVER_URL=http://configserver:9296
       - spring.datasource.url=jdbc:mysql://database:3306/orderdb?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Turkey
       - spring.datasource.username=root
       - spring.datasource.password=ippavlova_1990
@@ -127,13 +127,13 @@ services:
 
 
   paymentservice:
-    image: 'microservicedailybuffer/paymentservice:0.0.1'
+    image: 'noyandocker/paymentservice:latest'
     container_name: paymentservice
     ports:
       - '8083:8083'
     environment:
       - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
-      - CONFIG_SERVER_URL=configserver
+      - CONFIG_SERVER_URL=http://configserver:9296
       - spring.datasource.url=jdbc:mysql://database:3306/paymentdb?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Turkey
       - spring.datasource.username=root
       - spring.datasource.password=ippavlova_1990
