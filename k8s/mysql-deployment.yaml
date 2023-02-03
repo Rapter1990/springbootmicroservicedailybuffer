@@ -89,10 +89,6 @@ metadata:
   name: mysql-initdb-cm
 data:
   init.sql: |
-    CREATE USER 'springmicroserviceuser'@'localhost' IDENTIFIED BY '111111';
     CREATE DATABASE IF NOT EXISTS orderdb;
     CREATE DATABASE IF NOT EXISTS paymentdb;
     CREATE DATABASE IF NOT EXISTS productdb;
-    GRANT ALL PRIVILEGES ON `orderdb`.* TO 'springmicroserviceuser'@'%' WITH GRANT OPTION;
-    GRANT ALL PRIVILEGES ON `paymentdb`.* TO 'springmicroserviceuser'@'%' WITH GRANT OPTION;
-    GRANT ALL PRIVILEGES ON `productdb`.* TO 'springmicroserviceuser'@'%' WITH GRANT OPTION;
