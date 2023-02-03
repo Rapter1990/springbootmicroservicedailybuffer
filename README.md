@@ -306,23 +306,23 @@
   </tr>
   <tr>
     <td>apigateway</td>
-    <td>mvn clean install -D skipTests</td>
+    <td>mvn clean install -DskipTests</td>
   </tr>
   <tr>
     <td>auth-service</td>
-    <td>mvn clean install -D skipTests</td>
+    <td>mvn clean install -DskipTests</td>
   </tr>
   <tr>
     <td>orderservice</td>
-    <td>mvn clean install -D skipTests</td>
+    <td>mvn clean install -DskipTests</td>
   </tr>
   <tr>
     <td>productservice</td>
-    <td>mvn clean install -D skipTests</td>
+    <td>mvn clean install -DskipTests</td>
   </tr>
   <tr>
     <td>paymentservice</td>
-    <td>mvn clean install -D skipTests</td>
+    <td>mvn clean install -DskipTests</td>
   </tr>
 </table>
 
