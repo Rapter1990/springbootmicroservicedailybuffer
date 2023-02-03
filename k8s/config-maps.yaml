@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: config-cm
 data:
-  config_url: "config-server-svc"
+  config_url: "http://config-server-svc"
 
 ---
 

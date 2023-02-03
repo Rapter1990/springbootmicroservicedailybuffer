@@ -17,7 +17,6 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 7777
-
           env:
             - name: CONFIG_SERVER_URL
               valueFrom:
