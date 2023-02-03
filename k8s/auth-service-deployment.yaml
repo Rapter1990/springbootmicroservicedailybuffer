@@ -56,5 +56,5 @@ spec:
   selector:
     app: auth-service-app
   ports:
-    - port: 80
+    - port: 7777
       targetPort: 7777
