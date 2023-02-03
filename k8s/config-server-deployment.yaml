@@ -35,5 +35,5 @@ spec:
   selector:
     app: config-server-app
   ports:
-    - port: 9296
+    - port: 80
       targetPort: 9296

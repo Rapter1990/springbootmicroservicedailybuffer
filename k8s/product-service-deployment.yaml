@@ -46,5 +46,5 @@ spec:
   selector:
     app: product-service-app
   ports:
-    - port: 8081
+    - port: 80
       targetPort: 8081
