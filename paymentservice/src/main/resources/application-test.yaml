@@ -11,7 +11,7 @@ spring:
   application:
     name: PAYMENT-SERVICE
   config:
-    import: configserver:http://localhost:9296
+    import: optional:configserver:http://localhost:9296
 
 
 jwt:

@@ -14,7 +14,7 @@ spring:
   application:
     name: AUTH-SERVICE
   config:
-    import: configserver:${CONFIG_SERVER_URL:http://localhost:9296}
+    import: optional:configserver:${CONFIG_SERVER_URL:http://localhost:9296}
 
 jwt:
   secret: mySecretKey
