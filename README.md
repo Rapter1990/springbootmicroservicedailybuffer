@@ -1,4 +1,4 @@
-# Spring Boot Microservice Example (Eureka Server, Config Server, API Gateway, Services , Zipkin, Redis, Docker, Kubernetes)
+# Spring Boot Microservice Example (Eureka Server, Config Server, API Gateway, Services , Zipkin, Redis, Resilience4j, Docker, Kubernetes)
 
 <img src="screenshots/springbootmicroservices.drawio_image.png" alt="Main Information" width="800" height="900">
 
@@ -143,6 +143,8 @@
 * Zipkin
 * Docker
 * Kubernetes
+* Jenkins
+* Junit
 
 ## Valid Request Body
 
@@ -425,6 +427,8 @@
     <img src ="screenshots/docker_1.PNG">
     <p> Docker Hub </p>
     <img src ="screenshots/docker_2.PNG">
+    <p> Kubernetes Dashboard </p>
+    <img src ="screenshots/kubernetes_screenshot.PNG">
     <p> Jenkins Figure 1 </p>
     <img src ="screenshots/jenkins_1.PNG">
     <p> Jenkins Figure 2 </p>
