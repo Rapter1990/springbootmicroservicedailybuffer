@@ -1,6 +1,6 @@
 # Spring Boot Microservice Example (Eureka Server, Config Server, API Gateway, Services , Zipkin, Redis, Resilience4j, Docker, Kubernetes)
 
-<img src="screenshots/springbootmicroservice_drawio.png" alt="Main Information" width="800" height="900">
+<img src="screenshots/springbootmicroservice_drawio.png" alt="Main Information" width="800" height="500">
 
 # About the project
 <ul style="list-style-type:disc">
