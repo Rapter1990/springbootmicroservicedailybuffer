@@ -145,6 +145,7 @@
 * Kubernetes
 * Jenkins
 * Junit
+* Log4j2
 
 ## Valid Request Body
 
@@ -273,25 +274,25 @@
 
 <b>2 )</b> Go to the project's home directory :  `cd springbootmicroservicedailybuffer`
 
-<b>3 )</b> Run Service Registry (Eureka Server)
+<b>3 )</b> Run <b>Service Registry (Eureka Server)</b>
 
-<b>4 )</b> Run config server
+<b>4 )</b> Run <b>config server</b>
 
-<b>5 )</b> Run zipkin and redis through these commands shown below on docker
+<b>5 )</b> Run <b>zipkin</b> and <b>redis</b> through these commands shown below on <b>Docker</b>
 ```
     docker run -d -p 9411:9411 openzipkin/zipkin
     docker run -d --name redis -p 6379:6379 redis
 ```
 
-<b>6 )</b> Run api gateway
+<b>6 )</b> Run <b>api gateway</b>
 
-<b>7 )</b> Run other services (auth-service, orderservice, paymentservice and lastly productservice)
+<b>7 )</b> Run other services (<b>auth-service</b>, <b>orderservice</b>, <b>paymentservice</b> and lastly <b>productservice</b>)
 
 <b>Docker</b>
 
 <b>1 )</b> Install <b>Docker Desktop</b>. Here is the installation <b>link</b> : https://docs.docker.com/docker-for-windows/install/
 
-<b>2 )</b> Build jar file for all services shown below
+<b>2 )</b> Build <b>jar</b> file for all services shown below
 
 <table style="width:100%">
   <tr>
@@ -328,7 +329,7 @@
   </tr>
 </table>
 
-<b>3 )</b> Build all images and push to <b>Docker Hub</b>
+<b>3 )</b> Build all <b>images</b> and push to <b>Docker Hub</b>
 ```
     1 ) service-registry
      
@@ -373,7 +374,7 @@
         - docker push noyandocker/paymentservice
 ```
 
-<b>4 )</b> Run all Containers through this command shown below under main folder
+<b>4 )</b> Run all <b>Containers</b> through this command shown below under main folder
 ```
     docker-compose up -d
 ```
