@@ -1,6 +1,6 @@
 # Spring Boot Microservice Example (Eureka Server, Config Server, API Gateway, Services , Zipkin, Redis, Resilience4j, Docker, Kubernetes)
 
-<img src="screenshots/springbootmicroservices.drawio_image.png" alt="Main Information" width="800" height="900">
+<img src="screenshots/springbootmicroservice_drawio.png" alt="Main Information" width="800" height="900">
 
 # About the project
 <ul style="list-style-type:disc">
@@ -402,6 +402,28 @@
 ```
     kubectl apply -f k8s
 ```
+
+<b>6 )</b> Show all information about images running on <b>Kubernetes</b> through this command
+```
+    kubectl get all
+```
+
+<b>7 )</b> Show all <b>services</b> running on Kubernetes through this command
+```
+    kubectl get services
+```
+
+<b>8 )</b> Show <b>eureka server</b> on Kubernetes through this command
+```
+    minikube service eureka-lb minikube service cloud-gateway-svc
+```
+
+<b>9 )</b> Show <b>api gateway</b> on Kubernetes through this command
+```
+    minikube service cloud-gateway-svc
+```
+<b>10 )</b> Copy <b>IP address</b> and Replace <b>it</b> with <b>localhost</b> of the <b>endpoints</b> defined in <b>postman collection</b>
+
 
 <b>Jenkins</b>
 
