@@ -416,7 +416,7 @@
 
 <b>8 )</b> Show <b>eureka server</b> on Kubernetes through this command
 ```
-    minikube service eureka-lb minikube service cloud-gateway-svc
+    minikube service eureka-lb
 ```
 
 <b>9 )</b> Show <b>api gateway</b> on Kubernetes through this command
