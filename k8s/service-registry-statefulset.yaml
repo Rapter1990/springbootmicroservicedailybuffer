@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -45,5 +46,5 @@ spec:
   selector:
     app: eureka
   ports:
-    - port: 80
+    - port: 8761
       targetPort: 8761
